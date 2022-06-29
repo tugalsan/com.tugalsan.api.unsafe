@@ -1,5 +1,6 @@
 package com.tugalsan.api.unsafe.client;
 
+import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.executable.client.*;
 
 public class TGS_UnSafe {
@@ -38,46 +39,17 @@ public class TGS_UnSafe {
     }
 
     public static <R> R compile(TGS_UnSafeCompiler<R> cmp) {
+        return compile(cmp, null);
+    }
+
+    public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception) {
         try {
             return cmp.compile();
         } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Deprecated //DO U REALLY NEED IT?
-    public static <R, A> R compile(A inputA, TGS_UnSafeCompilerType1<R, A> cmp) {
-        try {
-            return cmp.compile(inputA);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Deprecated //DO U REALLY NEED IT?
-    public static <R, A, B> R compile(A inputA, B inputB, TGS_UnSafeCompilerType2<R, A, B> cmp) {
-        try {
-            return cmp.compile(inputA, inputB);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Deprecated //DO U REALLY NEED IT?
-    public static <R, A, B, C> R compile(A inputA, B inputB, C inputC, TGS_UnSafeCompilerType3<R, A, B, C> cmp) {
-        try {
-            return cmp.compile(inputA, inputB, inputC);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Deprecated //DO U REALLY NEED IT?
-    public static <R, A, B, C, D> R compile(A inputA, B inputB, C inputC, D inputD, TGS_UnSafeCompilerType4<R, A, B, C, D> cmp) {
-        try {
-            return cmp.compile(inputA, inputB, inputC, inputD);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            if (exception == null) {
+                throw new RuntimeException(e);
+            }
+            return exception.compile(e);
         }
     }
 }
