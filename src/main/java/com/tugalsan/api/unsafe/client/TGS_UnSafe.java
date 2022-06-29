@@ -32,11 +32,6 @@ public class TGS_UnSafe {
         }
     }
 
-    public static void erre() {
-        String a = compile(() -> "a");
-        String b = compile("a", aaa -> aaa + "a");
-    }
-
     public static <R, A> R compile(A inputA, TGS_UnSafeCompilerType1<R, A> cmp) {
         try {
             return cmp.compile(inputA);
