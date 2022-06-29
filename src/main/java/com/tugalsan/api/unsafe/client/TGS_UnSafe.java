@@ -1,5 +1,7 @@
 package com.tugalsan.api.unsafe.client;
 
+import com.tugalsan.api.executable.client.*;
+
 public class TGS_UnSafe {
 
     public static void catchMeIfUCan(CharSequence className, CharSequence funcName, Object errorContent) {
@@ -19,12 +21,19 @@ public class TGS_UnSafe {
     }
 
     public static void execute(TGS_UnSafeExecutable exe) {
+        execute(exe, null);
+    }
+
+    public static void execute(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception) {
         try {
             if (exe != null) {
                 exe.execute();
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            if (exception == null) {
+                throw new RuntimeException(e);
+            }
+            exception.execute(e);
         }
     }
 
@@ -36,6 +45,7 @@ public class TGS_UnSafe {
         }
     }
 
+    @Deprecated //DO U REALLY NEED IT?
     public static <R, A> R compile(A inputA, TGS_UnSafeCompilerType1<R, A> cmp) {
         try {
             return cmp.compile(inputA);
@@ -44,6 +54,7 @@ public class TGS_UnSafe {
         }
     }
 
+    @Deprecated //DO U REALLY NEED IT?
     public static <R, A, B> R compile(A inputA, B inputB, TGS_UnSafeCompilerType2<R, A, B> cmp) {
         try {
             return cmp.compile(inputA, inputB);
@@ -52,6 +63,7 @@ public class TGS_UnSafe {
         }
     }
 
+    @Deprecated //DO U REALLY NEED IT?
     public static <R, A, B, C> R compile(A inputA, B inputB, C inputC, TGS_UnSafeCompilerType3<R, A, B, C> cmp) {
         try {
             return cmp.compile(inputA, inputB, inputC);
@@ -60,6 +72,7 @@ public class TGS_UnSafe {
         }
     }
 
+    @Deprecated //DO U REALLY NEED IT?
     public static <R, A, B, C, D> R compile(A inputA, B inputB, C inputC, D inputD, TGS_UnSafeCompilerType4<R, A, B, C, D> cmp) {
         try {
             return cmp.compile(inputA, inputB, inputC, inputD);
