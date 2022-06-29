@@ -6,6 +6,10 @@ public class TGS_UnSafe {
         throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
+    public static <R> R catchMeIfUCanReturns(CharSequence className, CharSequence funcName, Object errorContent) {
+        throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
+    }
+
     public static void catchMeIfUCan(Throwable t) {
         throw new RuntimeException(t);
     }
