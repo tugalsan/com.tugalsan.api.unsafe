@@ -4,14 +4,6 @@
     <groupId>com.tugalsan</groupId>
     <artifactId>com.tugalsan.api.unsafe</artifactId>
     <version>1.0-SNAPSHOT</version>
-  
-    <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>com.tugalsan.api.executable</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
     
     <build>
         <resources> 
