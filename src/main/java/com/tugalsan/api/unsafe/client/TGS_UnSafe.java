@@ -10,6 +10,10 @@ public class TGS_UnSafe {
         throw new RuntimeException(t);
     }
 
+    public static <R> R catchMeIfUCanReturns(Throwable t) {
+        throw new RuntimeException(t);
+    }
+
     public static void execute(TGS_UnSafeExecutable exe) {
         try {
             if (exe != null) {
