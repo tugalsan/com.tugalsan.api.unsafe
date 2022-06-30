@@ -2,6 +2,7 @@ package com.tugalsan.api.unsafe.client;
 
 import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.executable.client.*;
+import java.util.function.*;
 
 public class TGS_UnSafe {
 
@@ -51,5 +52,12 @@ public class TGS_UnSafe {
             }
             return exception.compile(e);
         }
+    }
+
+    public static void doNothing() {
+    }
+
+    public static <R> R returnNull() {
+        return null;
     }
 }
