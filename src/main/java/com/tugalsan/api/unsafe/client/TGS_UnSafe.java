@@ -2,7 +2,6 @@ package com.tugalsan.api.unsafe.client;
 
 import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.executable.client.*;
-import java.util.function.*;
 
 public class TGS_UnSafe {
 
@@ -14,7 +13,7 @@ public class TGS_UnSafe {
         throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
-    public static RuntimeException catchMeIfUCan(Throwable t) {
+    public static void catchMeIfUCan(Throwable t) {
         throw new RuntimeException(t);
     }
 
