@@ -13,7 +13,7 @@ public class TGS_UnSafe {
         throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
-    public static void catchMeIfUCan(Throwable t) {
+    public static RuntimeException catchMeIfUCan(Throwable t) {
         throw new RuntimeException(t);
     }
 
