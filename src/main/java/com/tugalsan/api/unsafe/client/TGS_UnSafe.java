@@ -5,12 +5,16 @@ import com.tugalsan.api.executable.client.*;
 
 public class TGS_UnSafe {
 
-    public static void catchMeIfUCan(CharSequence className, CharSequence funcName, Object errorContent) {
+    public static RuntimeException createException(CharSequence className, CharSequence funcName, Object errorContent) {
         throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
+    public static void catchMeIfUCan(CharSequence className, CharSequence funcName, Object errorContent) {
+        throw createException(className, funcName, errorContent);
+    }
+
     public static <R> R catchMeIfUCanReturns(CharSequence className, CharSequence funcName, Object errorContent) {
-        throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
+        throw createException(className, funcName, errorContent);
     }
 
     public static void catchMeIfUCan(Throwable t) {
