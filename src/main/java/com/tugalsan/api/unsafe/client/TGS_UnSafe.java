@@ -30,6 +30,10 @@ public class TGS_UnSafe {
     }
 
     public static void execute(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception) {
+        execute(exe, exception, null);
+    }
+
+    public static void execute(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception, TGS_Executable finalExe) {
         try {
             if (exe != null) {
                 exe.execute();
@@ -39,6 +43,10 @@ public class TGS_UnSafe {
                 throw new RuntimeException(e);
             }
             exception.execute(e);
+        } finally {
+            if (finalExe != null) {
+                finalExe.execute();
+            }
         }
     }
 
@@ -47,6 +55,10 @@ public class TGS_UnSafe {
     }
 
     public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception) {
+        return compile(cmp, exception, null);
+    }
+
+    public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception, TGS_Executable finalExe) {
         try {
             return cmp.compile();
         } catch (Exception e) {
@@ -54,6 +66,10 @@ public class TGS_UnSafe {
                 throw new RuntimeException(e);
             }
             return exception.compile(e);
+        } finally {
+            if (finalExe != null) {
+                finalExe.execute();
+            }
         }
     }
 
