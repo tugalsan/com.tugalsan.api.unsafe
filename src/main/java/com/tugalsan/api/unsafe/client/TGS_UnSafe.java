@@ -2,7 +2,6 @@ package com.tugalsan.api.unsafe.client;
 
 import com.tugalsan.api.compiler.client.*;
 import com.tugalsan.api.executable.client.*;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class TGS_UnSafe {
 
@@ -34,12 +33,6 @@ public class TGS_UnSafe {
         execute(exe, exception, null);
     }
 
-    public static void executeSafe(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception) {
-        var lock = new ReentrantLock();
-        lock.lock();
-        execute(exe, exception, () -> lock.unlock());
-    }
-
     public static void execute(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception, TGS_Executable finalExe) {
         try {
             if (exe != null) {
@@ -63,12 +56,6 @@ public class TGS_UnSafe {
 
     public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception) {
         return compile(cmp, exception, null);
-    }
-
-    public static <R> R compileSafe(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception) {
-        var lock = new ReentrantLock();
-        lock.lock();
-        return compile(cmp, exception, () -> lock.unlock());
     }
 
     public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception, TGS_Executable finalExe) {
