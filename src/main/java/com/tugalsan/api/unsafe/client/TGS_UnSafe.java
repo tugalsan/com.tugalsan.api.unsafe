@@ -1,67 +1,68 @@
 package com.tugalsan.api.unsafe.client;
 
 import com.tugalsan.api.callable.client.*;
-import com.tugalsan.api.executable.client.*;
+import com.tugalsan.api.runnable.client.*;
+import java.util.concurrent.Callable;
 
 public class TGS_UnSafe {
 
-    public static RuntimeException createException(CharSequence className, CharSequence funcName, Object errorContent) {
+    public static RuntimeException toRuntimeException(CharSequence className, CharSequence funcName, Object errorContent) {
         throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
-    public static void catchMeIfUCan(CharSequence className, CharSequence funcName, Object errorContent) {
-        throw createException(className, funcName, errorContent);
+    public static void thrw(CharSequence className, CharSequence funcName, Object errorContent) {
+        throw toRuntimeException(className, funcName, errorContent);
     }
 
-    public static <R> R catchMeIfUCanReturns(CharSequence className, CharSequence funcName, Object errorContent) {
-        throw createException(className, funcName, errorContent);
+    public static <R> R thrwReturns(CharSequence className, CharSequence funcName, Object errorContent) {
+        throw toRuntimeException(className, funcName, errorContent);
     }
 
-    public static void catchMeIfUCan(Throwable t) {
+    public static void thrw(Throwable t) {
         throw new RuntimeException(t);
     }
 
-    public static <R> R catchMeIfUCanReturns(Throwable t) {
+    public static <R> R thrwReturns(Throwable t) {
         throw new RuntimeException(t);
     }
 
-    public static void execute(TGS_UnSafeExecutable exe) {
-        execute(exe, null);
+    public static void run(TGS_UnSafeRunnable exe) {
+        run(exe, null);
     }
 
-    public static void execute(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception) {
-        execute(exe, exception, null);
+    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception) {
+        run(exe, exception, null);
     }
 
-    public static void execute(TGS_UnSafeExecutable exe, TGS_ExecutableType1<Exception> exception, TGS_Executable finalExe) {
+    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception, TGS_Runnable finalExe) {
         try {
             if (exe != null) {
-                exe.execute();
+                exe.run();
             }
         } catch (Exception e) {
             if (e instanceof InterruptedException ei) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-                throw new TGS_UnSafe_InterruptedException(ei);
+                throw new TGS_UnSafeInterruptedException(ei);
             }
             if (exception == null) {
                 throw new RuntimeException(e);
             }
-            exception.execute(e);
+            exception.run(e);
         } finally {
             if (finalExe != null) {
-                finalExe.execute();
+                finalExe.run();
             }
         }
     }
 
-    public static <R> R call(TGS_UnSafeCaller<R> cmp) {
+    public static <R> R call(Callable<R> cmp) {
         return call(cmp, null);
     }
 
-    public static <R> R call(TGS_UnSafeCaller<R> cmp, TGS_CallableType1<R, Exception> exception) {
+    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception) {
         return call(cmp, exception, null);
     }
 
-    public static <R> R call(TGS_UnSafeCaller<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_Executable finalExe) {
+    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_Runnable finalExe) {
         try {
             return cmp.call();
         } catch (Exception e) {
@@ -71,15 +72,19 @@ public class TGS_UnSafe {
             return exception.call(e);
         } finally {
             if (finalExe != null) {
-                finalExe.execute();
+                finalExe.run();
             }
         }
     }
 
-    public static void doNothing() {
+    public static void runNothing() {
     }
 
-    public static <R> R returnNull() {
+    public static <R> R callNull() {
         return null;
+    }
+
+    public static <R> R callValue(R result) {
+        return result;
     }
 }
