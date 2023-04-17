@@ -1,6 +1,6 @@
 package com.tugalsan.api.unsafe.client;
 
-import com.tugalsan.api.compiler.client.*;
+import com.tugalsan.api.callable.client.*;
 import com.tugalsan.api.executable.client.*;
 
 public class TGS_UnSafe {
@@ -53,22 +53,22 @@ public class TGS_UnSafe {
         }
     }
 
-    public static <R> R compile(TGS_UnSafeCompiler<R> cmp) {
-        return compile(cmp, null);
+    public static <R> R call(TGS_UnSafeCaller<R> cmp) {
+        return call(cmp, null);
     }
 
-    public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception) {
-        return compile(cmp, exception, null);
+    public static <R> R call(TGS_UnSafeCaller<R> cmp, TGS_CallableType1<R, Exception> exception) {
+        return call(cmp, exception, null);
     }
 
-    public static <R> R compile(TGS_UnSafeCompiler<R> cmp, TGS_CompilerType1<R, Exception> exception, TGS_Executable finalExe) {
+    public static <R> R call(TGS_UnSafeCaller<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_Executable finalExe) {
         try {
-            return cmp.compile();
+            return cmp.call();
         } catch (Exception e) {
             if (exception == null) {
                 throw new RuntimeException(e);
             }
-            return exception.compile(e);
+            return exception.call(e);
         } finally {
             if (finalExe != null) {
                 finalExe.execute();

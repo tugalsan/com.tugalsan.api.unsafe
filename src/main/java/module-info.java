@@ -1,5 +1,5 @@
 module com.tugalsan.api.unsafe {
     requires com.tugalsan.api.executable;
-    requires com.tugalsan.api.compiler;
+    requires com.tugalsan.api.callable;
     exports com.tugalsan.api.unsafe.client;
 }
