@@ -39,6 +39,9 @@ public class TGS_UnSafe {
                 exe.execute();
             }
         } catch (Exception e) {
+            if (e instanceof InterruptedException ei) {
+                throw new TGS_UnSafe_InterruptedException(ei);
+            }
             if (exception == null) {
                 throw new RuntimeException(e);
             }
