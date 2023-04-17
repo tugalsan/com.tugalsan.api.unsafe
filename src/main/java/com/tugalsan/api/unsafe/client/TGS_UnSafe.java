@@ -39,7 +39,7 @@ public class TGS_UnSafe {
                 exe.execute();
             }
         } catch (Exception e) {
-            if (e instanceof InterruptedException ei) {
+            if (e instanceof InterruptedException ei) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
                 throw new TGS_UnSafe_InterruptedException(ei);
             }
             if (exception == null) {
