@@ -40,8 +40,8 @@ public class TGS_UnSafe {
                 exe.run();
             }
         } catch (Exception e) {
-            if (e instanceof InterruptedException ei) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-                throw new TGS_UnSafeInterruptedException(ei);
+            if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
+                throw new TGS_UnSafeInterruptedException((InterruptedException) e);//GWT does not like u
             }
             if (exception == null) {
                 throw new RuntimeException(e);
