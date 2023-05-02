@@ -41,7 +41,7 @@ public class TGS_UnSafe {
             }
         } catch (Exception e) {
             if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-                throw new TGS_UnSafeInterruptedException((InterruptedException) e);//GWT does not like u
+                throw new TGS_UnSafeInterruptedException((InterruptedException) e);
             }
             if (exception == null) {
                 throw new RuntimeException(e);
@@ -66,6 +66,9 @@ public class TGS_UnSafe {
         try {
             return cmp.call();
         } catch (Exception e) {
+            if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
+                throw new TGS_UnSafeInterruptedException((InterruptedException) e);
+            }
             if (exception == null) {
                 throw new RuntimeException(e);
             }
