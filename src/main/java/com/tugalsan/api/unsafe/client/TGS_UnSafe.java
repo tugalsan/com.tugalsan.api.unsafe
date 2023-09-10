@@ -34,15 +34,18 @@ public class TGS_UnSafe {
         run(exe, exception, null);
     }
 
+    public static void throwIfInterruptedException(Exception e) {
+        if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
+            throw new TGS_UnSafeInterruptedException((InterruptedException) e);
+        }
+    }
+
     public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception, TGS_Runnable finalExe) {
         try {
             if (exe != null) {
                 exe.run();
             }
         } catch (Exception e) {
-            if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-                throw new TGS_UnSafeInterruptedException((InterruptedException) e);
-            }
             if (exception == null) {
                 throw new RuntimeException(e);
             }
@@ -66,9 +69,7 @@ public class TGS_UnSafe {
         try {
             return cmp.call();
         } catch (Exception e) {
-            if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-                throw new TGS_UnSafeInterruptedException((InterruptedException) e);
-            }
+            throwIfInterruptedException(e);
             if (exception == null) {
                 throw new RuntimeException(e);
             }
