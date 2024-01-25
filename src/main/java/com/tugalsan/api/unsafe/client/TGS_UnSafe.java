@@ -7,7 +7,7 @@ import java.util.concurrent.Callable;
 public class TGS_UnSafe {
 
     public static RuntimeException toRuntimeException(CharSequence className, CharSequence funcName, Object errorContent) {
-        throw new RuntimeException("CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
+        return new RuntimeException("TGS_UnSafe.toRuntimeException->CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
     public static void thrw(CharSequence className, CharSequence funcName, Object errorContent) {
