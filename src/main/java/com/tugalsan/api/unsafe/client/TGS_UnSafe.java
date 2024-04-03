@@ -37,23 +37,23 @@ public class TGS_UnSafe {
     public static <R> R callValue(R result) {
         return result;
     }
-    
+
     //-------------------- INTERRUPTED EXCEPTION ----------------
-    public static void throwIfInterruptedException(Exception e) throws InterruptedException {
+    public static void throwIfInterruptedException(Exception e) {
         if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-            throw (InterruptedException) e;
+            throw new RuntimeException(e);
         }
     }
 
-    public static void run(TGS_UnSafeRunnable exe) throws InterruptedException {
+    public static void run(TGS_UnSafeRunnable exe) {
         run(exe, null);
     }
 
-    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception)throws InterruptedException  {
+    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception) {
         run(exe, exception, null);
     }
 
-    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception, TGS_Runnable finalExe) throws InterruptedException {
+    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception, TGS_Runnable finalExe) {
         try {
             if (exe != null) {
                 exe.run();
@@ -75,11 +75,11 @@ public class TGS_UnSafe {
         return call(cmp, null);
     }
 
-    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception) throws InterruptedException {
+    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception) {
         return call(cmp, exception, null);
     }
 
-    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_Runnable finalExe)throws InterruptedException  {
+    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_Runnable finalExe) {
         try {
             return cmp.call();
         } catch (Exception e) {
