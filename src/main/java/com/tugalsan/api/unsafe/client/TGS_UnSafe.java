@@ -36,7 +36,7 @@ public class TGS_UnSafe {
 
     public static void throwIfInterruptedException(Exception e) {
         if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
-            throw new TGS_UnSafeInterruptedException((InterruptedException) e);
+            Thread.currentThread().interrupt();
         }
     }
 
