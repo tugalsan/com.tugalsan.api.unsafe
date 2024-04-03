@@ -1,4 +1,4 @@
-package com.tugalsan.api.unsafe.deprecated;
+package com.tugalsan.api.unsafe.client;
 
 public interface TGS_UnSafeRunnable {
 
