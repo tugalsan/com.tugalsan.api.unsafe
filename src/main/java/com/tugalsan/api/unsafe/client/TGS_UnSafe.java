@@ -71,7 +71,7 @@ public class TGS_UnSafe {
         }
     }
 
-    public static <R> R call(Callable<R> cmp) throws InterruptedException {
+    public static <R> R call(Callable<R> cmp) {
         return call(cmp, null);
     }
 
