@@ -40,12 +40,8 @@ public class TGS_UnSafe {
 
     //-------------------- INTERRUPTED EXCEPTION ----------------
     public static void throwIfInterruptedException(Exception e) {
-        if (e instanceof InterruptedException) {
-            /*
-                WARNING ON GWT
-                DO THIS: https://stackoverflow.com/questions/78271237/adding-standard-java-classes-that-are-missing-in-gwt
-             */
-            Thread.currentThread().interrupt();// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
+        if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
+            Thread.currentThread().interrupt();//WARNING FOR GWT: https://stackoverflow.com/questions/78271237/adding-standard-java-classes-that-are-missing-in-gwt
             throw new RuntimeException(e);
         }
     }
