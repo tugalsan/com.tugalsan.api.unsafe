@@ -7,6 +7,7 @@ import java.util.concurrent.Callable;
 
 public class TGS_UnSafe {
 
+    //-------------------CUSTOM EXCEPTION
     public static RuntimeException toRuntimeException(CharSequence className, CharSequence funcName, Object errorContent) {
         return new RuntimeException(TGS_UnSafe.class + ".toRuntimeException->CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
@@ -15,36 +16,14 @@ public class TGS_UnSafe {
         throw toRuntimeException(className, funcName, errorContent);
     }
 
-    public static void thrw(Throwable t) {
-        if (t instanceof RuntimeException) {
-            throw (RuntimeException) t;
-        }
-        throw new RuntimeException(t);
-    }
-
-    public static <R> R thrw(Throwable t) {
-        if (t instanceof RuntimeException) {
-            throw (RuntimeException) t;
-        }
-        throw new RuntimeException(t);
-    }
-
-    public static void runNothing() {
-    }
-
-    public static <R> R callNull() {
-        return null;
-    }
-
-    public static <R> R callValue(R result) {
-        return result;
-    }
-
     //-------------------- INTERRUPTED EXCEPTION ----------------
     public static void throwIfInterruptedException(Throwable t) {
         if (isInterruptedException(t)) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
             Thread.currentThread().interrupt();//WARNING FOR GWT: https://stackoverflow.com/questions/78271237/adding-standard-java-classes-that-are-missing-in-gwt
-            thrw(t);
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            }
+            throw new RuntimeException(t);
         }
     }
 
@@ -58,6 +37,26 @@ public class TGS_UnSafe {
         return false;
     }
 
+    public static <R> R thrw(Throwable t) {
+        throwIfInterruptedException(t);
+        if (t instanceof RuntimeException) {
+            throw (RuntimeException) t;
+        }
+        throw new RuntimeException(t);
+    }
+
+    //--------------------------DO NOTHING
+    public static void runNothing() {
+    }
+
+    public static <R> R callNull() {
+        return null;
+    }
+
+//    public static <R> R callValue(R result) {
+//        return result;
+//    }
+    //---------------------RUN---------------------
     public static void run(TGS_UnSafeRunnable exe) {
         run(exe, null);
     }
@@ -84,6 +83,7 @@ public class TGS_UnSafe {
         }
     }
 
+    //---------------------CALL---------------------
     public static <R> R call(Callable<R> cmp) {
         return call(cmp, null);
     }
