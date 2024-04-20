@@ -17,7 +17,7 @@ public class TGS_UnSafe {
     }
 
     //-------------------- INTERRUPTED EXCEPTION ----------------
-    public static void throwIfInterruptedException(Throwable t) {
+    public static <R> R throwIfInterruptedException(Throwable t) {
         if (isInterruptedException(t)) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
             Thread.currentThread().interrupt();//WARNING FOR GWT: https://stackoverflow.com/questions/78271237/adding-standard-java-classes-that-are-missing-in-gwt
             if (t instanceof RuntimeException) {
@@ -25,6 +25,7 @@ public class TGS_UnSafe {
             }
             throw new RuntimeException(t);
         }
+        return callNull();
     }
 
     public static boolean isInterruptedException(Throwable t) {
