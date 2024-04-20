@@ -32,7 +32,7 @@ public class TGS_UnSafe {
             return true;
         }
         if (t.getCause() != null) {
-            return isInterruptedException(t);
+            return isInterruptedException(t.getCause());
         }
         return false;
     }
