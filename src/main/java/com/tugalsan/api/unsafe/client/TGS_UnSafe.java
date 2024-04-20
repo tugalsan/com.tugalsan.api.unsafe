@@ -11,19 +11,21 @@ public class TGS_UnSafe {
         return new RuntimeException(TGS_UnSafe.class + ".toRuntimeException->CLASS[" + className + "] -> FUNC[" + funcName + "] -> ERR: " + errorContent);
     }
 
-    public static void thrw(CharSequence className, CharSequence funcName, Object errorContent) {
-        throw toRuntimeException(className, funcName, errorContent);
-    }
-
-    public static <R> R thrwReturns(CharSequence className, CharSequence funcName, Object errorContent) {
+    public static <R> R thrw(CharSequence className, CharSequence funcName, Object errorContent) {
         throw toRuntimeException(className, funcName, errorContent);
     }
 
     public static void thrw(Throwable t) {
+        if (t instanceof RuntimeException) {
+            throw (RuntimeException) t;
+        }
         throw new RuntimeException(t);
     }
 
-    public static <R> R thrwReturns(Throwable t) {
+    public static <R> R thrw(Throwable t) {
+        if (t instanceof RuntimeException) {
+            throw (RuntimeException) t;
+        }
         throw new RuntimeException(t);
     }
 
@@ -39,11 +41,21 @@ public class TGS_UnSafe {
     }
 
     //-------------------- INTERRUPTED EXCEPTION ----------------
-    public static void throwIfInterruptedException(Exception e) {
-        if (e instanceof InterruptedException) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
+    public static void throwIfInterruptedException(Throwable t) {
+        if (isInterruptedException(t)) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
             Thread.currentThread().interrupt();//WARNING FOR GWT: https://stackoverflow.com/questions/78271237/adding-standard-java-classes-that-are-missing-in-gwt
-            throw new RuntimeException(e);
+            thrw(t);
         }
+    }
+
+    public static boolean isInterruptedException(Throwable t) {
+        if (t instanceof InterruptedException) {
+            return true;
+        }
+        if (t.getCause() != null) {
+            return isInterruptedException(t);
+        }
+        return false;
     }
 
     public static void run(TGS_UnSafeRunnable exe) {
