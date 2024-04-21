@@ -4,7 +4,6 @@ import com.tugalsan.api.callable.client.TGS_CallableType1;
 import com.tugalsan.api.runnable.client.TGS_Runnable;
 import com.tugalsan.api.runnable.client.TGS_RunnableType1;
 import java.util.concurrent.Callable;
-import java.util.concurrent.TimeoutException;
 
 public class TGS_UnSafe {
 
@@ -35,16 +34,6 @@ public class TGS_UnSafe {
         }
         if (t.getCause() != null) {
             return isInterruptedException(t.getCause());
-        }
-        return false;
-    }
-
-    public static boolean isTimeoutException(Throwable t) {
-        if (t instanceof TimeoutException) {
-            return true;
-        }
-        if (t.getCause() != null) {
-            return isTimeoutException(t.getCause());
         }
         return false;
     }
