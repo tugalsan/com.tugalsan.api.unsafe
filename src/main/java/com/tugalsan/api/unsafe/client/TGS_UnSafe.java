@@ -3,7 +3,9 @@ package com.tugalsan.api.unsafe.client;
 import com.tugalsan.api.callable.client.TGS_CallableType1;
 import com.tugalsan.api.runnable.client.TGS_Runnable;
 import com.tugalsan.api.runnable.client.TGS_RunnableType1;
+import java.util.Optional;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeoutException;
 
 public class TGS_UnSafe {
 
@@ -26,6 +28,26 @@ public class TGS_UnSafe {
             throw new RuntimeException(t);
         }
         return callNull();
+    }
+
+    public static Optional<TimeoutException> getTimeoutException(Throwable t) {
+        if (t instanceof TimeoutException) {
+            return Optional.of((TimeoutException) t);
+        }
+        if (t.getCause() != null) {
+            return getTimeoutException(t.getCause());
+        }
+        return Optional.empty();
+    }
+
+    public static Optional<InterruptedException> getInterruptedException(Throwable t) {
+        if (t instanceof InterruptedException) {
+            return Optional.of((InterruptedException) t);
+        }
+        if (t.getCause() != null) {
+            return getInterruptedException(t.getCause());
+        }
+        return Optional.empty();
     }
 
     public static boolean isInterruptedException(Throwable t) {
