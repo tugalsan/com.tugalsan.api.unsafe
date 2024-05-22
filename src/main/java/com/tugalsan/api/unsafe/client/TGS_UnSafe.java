@@ -22,7 +22,7 @@ public class TGS_UnSafe {
     public static <R> R throwIfInterruptedException(Throwable t) {
         if (isInterruptedException(t)) {// U NEED THIS SO STRUCTURED SCOPE CAN ABLE TO SHUT DOWN
             Thread.currentThread().interrupt();//WARNING FOR GWT: https://stackoverflow.com/questions/78271237/adding-standard-java-classes-that-are-missing-in-gwt
-//        if (t instanceof RuntimeException) {// I WANNA WATCH PROPAGATION
+//        if (t instanceof RuntimeException) {//I DONT LIKE THIS, I WANNA WATCH PROPAGATION
 //            throw (RuntimeException) t;
 //        }
             throw new RuntimeException(t);
