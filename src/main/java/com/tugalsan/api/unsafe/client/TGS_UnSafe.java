@@ -1,8 +1,10 @@
 package com.tugalsan.api.unsafe.client;
 
+import com.tugalsan.api.callable.client.TGS_CallableType0Void;
 import com.tugalsan.api.callable.client.TGS_CallableType1;
-import com.tugalsan.api.runnable.client.TGS_Runnable;
-import com.tugalsan.api.runnable.client.TGS_RunnableType1;
+import com.tugalsan.api.callable.client.TGS_CallableType1Void;
+
+
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
@@ -84,11 +86,11 @@ public class TGS_UnSafe {
         run(exe, null);
     }
 
-    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception) {
+    public static void run(TGS_UnSafeRunnable exe, TGS_CallableType1Void<Exception> exception) {
         run(exe, exception, null);
     }
 
-    public static void run(TGS_UnSafeRunnable exe, TGS_RunnableType1<Exception> exception, TGS_Runnable finalExe) {
+    public static void run(TGS_UnSafeRunnable exe, TGS_CallableType1Void<Exception> exception, TGS_CallableType0Void finalExe) {
         try {
             if (exe != null) {
                 exe.run();
@@ -115,7 +117,7 @@ public class TGS_UnSafe {
         return call(cmp, exception, null);
     }
 
-    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_Runnable finalExe) {
+    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_CallableType0Void finalExe) {
         try {
             return cmp.call();
         } catch (Exception e) {
