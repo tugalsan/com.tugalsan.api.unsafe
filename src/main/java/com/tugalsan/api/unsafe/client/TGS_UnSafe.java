@@ -1,8 +1,8 @@
 package com.tugalsan.api.unsafe.client;
 
-import com.tugalsan.api.callable.client.TGS_CallableType0Void;
+import com.tugalsan.api.callable.client.TGS_CallableType0_Run;
 import com.tugalsan.api.callable.client.TGS_CallableType1;
-import com.tugalsan.api.callable.client.TGS_CallableType1Void;
+import com.tugalsan.api.callable.client.TGS_CallableType1_Run;
 
 
 import java.util.Optional;
@@ -86,11 +86,11 @@ public class TGS_UnSafe {
         run(exe, null);
     }
 
-    public static void run(TGS_UnSafeRunnable exe, TGS_CallableType1Void<Exception> exception) {
+    public static void run(TGS_UnSafeRunnable exe, TGS_CallableType1_Run<Exception> exception) {
         run(exe, exception, null);
     }
 
-    public static void run(TGS_UnSafeRunnable exe, TGS_CallableType1Void<Exception> exception, TGS_CallableType0Void finalExe) {
+    public static void run(TGS_UnSafeRunnable exe, TGS_CallableType1_Run<Exception> exception, TGS_CallableType0_Run finalExe) {
         try {
             if (exe != null) {
                 exe.run();
@@ -117,7 +117,7 @@ public class TGS_UnSafe {
         return call(cmp, exception, null);
     }
 
-    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_CallableType0Void finalExe) {
+    public static <R> R call(Callable<R> cmp, TGS_CallableType1<R, Exception> exception, TGS_CallableType0_Run finalExe) {
         try {
             return cmp.call();
         } catch (Exception e) {
