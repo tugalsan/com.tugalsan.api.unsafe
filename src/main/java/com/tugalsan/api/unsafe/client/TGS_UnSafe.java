@@ -4,7 +4,6 @@ import com.tugalsan.api.function.client.TGS_Func;
 import com.tugalsan.api.function.client.TGS_Func_OutTyped_In1;
 import com.tugalsan.api.function.client.TGS_Func_In1;
 
-
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeoutException;
@@ -29,7 +28,7 @@ public class TGS_UnSafe {
 //        }
             throw new RuntimeException(t);
         }
-        return callNull();
+        return null;
     }
 
     public static Optional<TimeoutException> getTimeoutException(Throwable t) {
@@ -70,17 +69,6 @@ public class TGS_UnSafe {
         throw new RuntimeException(t);
     }
 
-    //--------------------------DO NOTHING
-    public static void runNothing() {
-    }
-
-    public static <R> R callNull() {
-        return null;
-    }
-
-//    public static <R> R callValue(R result) {
-//        return result;
-//    }
     //---------------------RUN---------------------
     public static void run(TGS_UnSafeRunnable exe) {
         run(exe, null);
